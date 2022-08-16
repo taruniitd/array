@@ -34,6 +34,23 @@ int getMissingNo_UsingXor(int a[], int n)
     return x1^x2;
 }
 
+int getMissingNo_UsingCyclicSort(int arr[], int n)
+{
+    int i = 0;
+    while(i < n)
+    {
+        int correct = arr[i] - 1;
+        if(arr[i] < n && arr[i] != arr[correct])
+            swap(arr[i], arr[correct]);
+        else
+            i++;
+    }
+    for(int i = 0; i < n; i++)
+        if(i != arr[i] - 1)
+            return i + 1;
+    return n;
+}
+
 int main() {
 	int arr[] = { 1, 2, 3, 5 };
     int N = sizeof(arr) / sizeof(arr[0]);
@@ -45,5 +62,8 @@ int main() {
     cout << miss << endl;
     miss = getMissingNo_UsingXor(arr, N);
     cout << miss << endl;
+    miss = getMissingNo_UsingCyclicSort(arr, N);
+    cout << miss << endl;
 	return 0;
 }
+
